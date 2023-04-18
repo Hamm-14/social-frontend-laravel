@@ -21,7 +21,6 @@ import { COLORS } from "../assets";
 type LoginState = {
   email: string;
   password: string;
-  role: string;
 };
 
 type LoginError = {
@@ -36,14 +35,12 @@ const sampleLoginError: LoginError = {
 
 const sampleObject: LoginState = {
   email: "",
-  password: "",
-  role: "admin",
+  password: ""
 };
 
 const loginHelperObject: LoginState = {
   email: "Valid email is required",
-  password: "Valid Password is required",
-  role: "Not Authorized",
+  password: "Valid Password is required"
 };
 
 const Login = () => {

@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import { Divider, Drawer, List, ListItem, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IMAGES } from "../../assets";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutConfirmationModal from "./LogoutConfirmModal";
 import Diversity1Icon from "@mui/icons-material/Diversity1";
 
@@ -15,7 +13,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const bottomButtons: React.CSSProperties = {
-  fontSize: 25,
+  fontSize: 20,
   color: "#FFFFFF",
   display: "flex",
   alignItems: "center",
