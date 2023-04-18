@@ -1,16 +1,27 @@
-.App {
-  text-align: center;
-}
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+@font-face {
+  font-family: 'century_gothicregular';
+  src: url('assets/fonts/century_gothic-webfont.woff2') format('woff2'),
+       url('assets/fonts/century_gothic-webfont.woff') format('woff');
+  /* font-weight: normal; */
+  /* font-style: normal; */
+
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+body {
+  font-family: 'century_gothicregular';
+  background-color: #F5F6F8;
 }
 
 .App-header {
@@ -35,4 +46,90 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  padding: 15px 0px 15px 25px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.notificationCount::after {
+  content: '2';
+  background-color: #002F86;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
+  text-align: center;
+  width: 18px;
+  height: 15px;
+  display: inline-block;
+  position: absolute;
+  margin-left: -12px;
+}
+
+/* .main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%,
+}
+
+.table-container {
+  width: 75%;
+  padding: 9% 5% 5% 3%,
+}
+
+.side-panel-container {
+  width: 25%;
+  height: 100vh,
+}  */
+
+/* Meter css */
+
+.fillBlue { 
+  background-color: #dddddd;
+  fill: #00aaff;
+  
+  
+background: #FFFFFF;
+box-shadow: 0px 0px 74.6762px rgba(0, 0, 0, 0.36);
+}
+.fillWhite {
+   fill: white;
+
+}
+.meterSvg {
+  width: 100%;
+  overflow: visible;
+  padding: 2;
+}
+.strokeSvg1{ 
+  stroke:  #B9D9FF;
+  
+}
+.strokeSvg2{ 
+  stroke: #00aaff;
+}
+
+.outerCircle{
+  fill: #B9D9FF;
+}
+/* Meter css */
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
