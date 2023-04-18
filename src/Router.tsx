@@ -1,5 +1,4 @@
-import jwtDecode from "jwt-decode";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import BusinessDetailView from "./components/business/BusinessDetailView";
 import BusinessList from "./components/business/BusinessList";
@@ -14,34 +13,17 @@ import UsersList from "./components/users/UsersList";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "./screens/Login";
 import NotFound from "./screens/NotFound";
-import { DecodedToken } from "./types/token";
-
-const dummyDecodedToken = {
-  user_email: "",
-  user_id: "",
-  type: "",
-  iat: 0,
-  exp: 0,
-};
+import Register from "./screens/Register";
 
 const Router = () => {
-  const [decodedToken, setDecodedToken] = useState<DecodedToken>(dummyDecodedToken);
   let navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (token) {
-      // const decoded: DecodedToken = jwtDecode(token);
-      // setDecodedToken(decoded);
-      // if (decoded.exp < Date.now() / 1000) {
-      //   localStorage.clear();
-      //   localStorage.removeItem("token");
-      //   localStorage.removeItem("userId");
-      //   navigate("/");
-      // }
       navigate("/");
     }
-  }, [token, navigate, setDecodedToken]);
+  }, [token, navigate]);
 
   return (
     <div>
@@ -49,6 +31,10 @@ const Router = () => {
         <Route
           path="/"
           element={token ? <FloorPlanList /> : <Login />}
+        />
+         <Route
+          path="/register"
+          element={token ? <FloorPlanList /> : <Register />}
         />
         <Route element={<ProtectedRoutes />}>
           <Route path="/floor-plan-request/:id" element={<FloorPlanTabs />} />

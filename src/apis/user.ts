@@ -1,5 +1,5 @@
 import { projectApi } from "./query";
-import { User, UserData } from "../types/user";
+import { User, UserData, UserRegisterData } from "../types/user";
 
 const base_url = process.env.REACT_APP_DASHBOARD_API_BASE_URL;
 
@@ -8,6 +8,14 @@ export const userApi = projectApi.injectEndpoints({
     authLogin: builder.mutation({
       query: (user: UserData) => ({
         url: `${base_url}/login`,
+        method: "POST",
+        data: user
+      }),
+      invalidatesTags: ["User"],
+    }),
+    register: builder.mutation({
+      query: (user: UserRegisterData) => ({
+        url: `${base_url}/register`,
         method: "POST",
         data: user
       }),
@@ -39,6 +47,7 @@ export const userApi = projectApi.injectEndpoints({
 
 export const {
   useAuthLoginMutation,
+  useRegisterMutation,
   useGetUserQuery,
   useGetAdminAndStaffUserQuery,
   useGetCustomerUserQuery,

@@ -15,18 +15,8 @@ import InputField from "../components/common/InputField";
 import { REGEX } from "../constant";
 import { useAuthLoginMutation } from "../apis/user";
 import { UserData } from "../types/user";
-import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { COLORS } from "../assets";
-
-type DecodedToken = {
-  user_email: string;
-  user_name: string;
-  user_id: string;
-  type: string;
-  iat: number;
-  exp: number;
-};
 
 type LoginState = {
   email: string;
@@ -98,10 +88,6 @@ const Login = () => {
         break;
     }
   };
-
-  // const handlepermissionsnackbar = (event: any) => {
-  //   setSuccessSnack(false);
-  // };
 
   const loginApi = async () => {
     try {
