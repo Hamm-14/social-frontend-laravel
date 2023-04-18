@@ -101,7 +101,6 @@ export default function LogoutConfirmationModal(props: ModalProps) {
                   fontFamily: "century_gothicregular",
                   margin: 15,
                   fontSize: "1rem",
-                  backgroundColor: "#FA1010",
                 }}
                 onClick={props.handleLogout}
               />

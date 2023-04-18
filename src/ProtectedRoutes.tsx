@@ -1,6 +1,4 @@
-import jwtDecode from "jwt-decode";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { DecodedToken } from "./types/token";
 
 const useAuth = () => {
   const token = localStorage.getItem("token");

@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
-import { Divider, Drawer, List, ListItem } from "@mui/material";
+import { Divider, Drawer, List, ListItem, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IMAGES } from "../../assets";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutConfirmationModal from "./LogoutConfirmModal";
+import Diversity1Icon from "@mui/icons-material/Diversity1";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -14,10 +15,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const bottomButtons: React.CSSProperties = {
-  fontSize: 16,
+  fontSize: 25,
   color: "#FFFFFF",
-  marginTop: 4,
-  marginBottom: 4,
   display: "flex",
   alignItems: "center",
   cursor: "pointer",
@@ -27,7 +26,7 @@ const drawerHeader: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  margin: "3% 3% 5% 3%",
+  margin: "3% 3% 2% 6%",
 };
 
 const list: React.CSSProperties = {
@@ -56,11 +55,10 @@ const bottomBoxContainer: React.CSSProperties = {
 };
 const bottomBox: React.CSSProperties = {
   position: "absolute",
-  width: 260,
-  height: 70,
-  marginBottom: "7%",
+  marginBottom: "5%",
   bottom: 0,
   padding: 0,
+  left: "5%"
 };
 
 const dividerStyle: React.CSSProperties = {
@@ -85,27 +83,17 @@ const tabList = [
   {
     id: 0,
     route: "",
-    title: "Floor Plan Request",
+    title: "News Feed",
   },
   {
     id: 1,
-    route: "business",
-    title: "Business Information",
+    route: "network",
+    title: "Social Network",
   },
   {
     id: 2,
-    route: "users",
-    title: "Users",
-  },
-  {
-    id: 3,
-    route: "customers",
-    title: "Customers",
-  },
-  {
-    id: 4,
-    route: "credit-line-application",
-    title: "Credit Line Application",
+    route: "profile",
+    title: "Profile",
   },
 ];
 
@@ -158,7 +146,7 @@ const SidePanel: React.FC = () => {
         }}
       >
         <DrawerHeader style={drawerHeader}>
-          <img src={IMAGES.auto_debt_logo} alt="" style={logo} />
+          <Typography color={"#0AB2FA"} fontSize={40}><Diversity1Icon color="secondary" fontSize="large" /> Codeial</Typography>
         </DrawerHeader>
         {/* <Divider
           sx={{ borderWidth: 1, marginTop: "4%", marginBottom: "2%", background: "#ECECEC" }}
@@ -196,14 +184,9 @@ const SidePanel: React.FC = () => {
           </div>
           <div style={bottomBoxContainer}>
             <div style={bottomBox}>
-              <div style={{ marginBottom: 12 }}>
+              <div>
                 <span style={bottomButtons} onClick={handleModalOpen}>
                   Logout &nbsp; <LogoutIcon />
-                </span>
-              </div>
-              <div>
-                <span style={bottomButtons}>
-                  Settings &nbsp; <SettingsIcon />
                 </span>
               </div>
             </div>
