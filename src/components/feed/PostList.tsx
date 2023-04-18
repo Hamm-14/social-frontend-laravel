@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../common/Header";
 import SidePanel from "../common/SidePanel";
 import PostCard from "./PostCard";
+import { useGetAllPostsQuery } from "../../apis/post";
+import { Box, CircularProgress } from "@mui/material";
 
 const mainContainer: React.CSSProperties = {
   display: "flex",
@@ -26,7 +28,19 @@ const postContainer: React.CSSProperties = {
   overflow: "scroll",
 };
 
+const noRecordDiv: React.CSSProperties = {
+  width: "100%",
+  position: "relative",
+  display: "flex",
+  justifyContent: "center",
+  marginTop: 5,
+  marginBottom: 20,
+  fontWeight: 600,
+  backgroundColor: "#F5F6F8",
+};
+
 const Feed = () => {
+  const { data, isLoading, isSuccess } = useGetAllPostsQuery("");
   return (
     <div style={mainContainer}>
       <div style={sidePanelContainer}>
@@ -35,12 +49,21 @@ const Feed = () => {
       <div style={{ width: "80%" }}>
         <Header title="News Feed" />
         <div style={postContainer} className="hide-scrollbar">
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
+          {isSuccess && data?.data?.length > 0 && data.data.map((post: any) => {
+            return <PostCard postCardData={post} key={post.id}/>
+          })}
+          {!isLoading && data?.length === 0 && (
+            <Box sx={noRecordDiv}>
+              <Box>No Record Found</Box>
+            </Box>
+          )}
+          {isLoading && (
+            <Box sx={noRecordDiv}>
+              <Box>
+                <CircularProgress size={30} />
+              </Box>
+            </Box>
+          )}
         </div>
       </div>
     </div>

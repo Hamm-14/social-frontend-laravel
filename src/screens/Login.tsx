@@ -99,6 +99,7 @@ const Login = () => {
           localStorage.setItem("email", resp.user.email);
           localStorage.setItem("avatar", resp.user.avatar);
           localStorage.setItem("token", resp.token);
+          localStorage.setItem("userId", resp.user.id);
           navigate("/");
           setIsLoading(false);
           return;

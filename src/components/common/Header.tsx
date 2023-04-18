@@ -6,6 +6,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const { title } = props;
+  const userName = localStorage.getItem('username');
 
   const mainContainer: React.CSSProperties = {
     position: "fixed",
@@ -61,7 +62,7 @@ const Header = (props: HeaderProps) => {
             <img src={IMAGES.profile_pic} alt="profile_pic" width={42} height={42} />
           </div>
           <div style={admin}>
-            Admin <img src={IMAGES.dropdown_icon} alt="dropdown icon" height={7} width={10} />
+            {userName} <img src={IMAGES.dropdown_icon} alt="dropdown icon" height={7} width={10} />
           </div>
         </div>
       </div>
