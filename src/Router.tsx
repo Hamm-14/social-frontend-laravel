@@ -7,6 +7,7 @@ import NotFound from "./screens/NotFound";
 import Register from "./screens/Register";
 import CreatePost from "./components/post/CreatePost";
 import EditPost from "./components/post/EditPost";
+import ProfileView from "./components/profile/ProfileView";
 
 const Router = () => {
   const token = localStorage.getItem("token");
@@ -24,6 +25,7 @@ const Router = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:id" element={<EditPost />} />
+          <Route path="/profile" element={<ProfileView />} />
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

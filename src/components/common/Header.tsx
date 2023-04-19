@@ -81,7 +81,7 @@ const Header = (props: HeaderProps) => {
         <div style={{ display: "flex" }}>
           <div>
             <img
-              src={!userAvatar ? `http://127.0.0.1:8080/${userAvatar}` : IMAGES.profile_pic}
+              src={userAvatar !== 'null' ? `http://127.0.0.1:8080/${userAvatar}` : IMAGES.profile_pic}
               alt="profile_pic"
               width={42}
               height={42}

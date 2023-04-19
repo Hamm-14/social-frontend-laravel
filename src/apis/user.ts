@@ -21,10 +21,19 @@ export const userApi = projectApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    updateUser: builder.mutation({
+      query: (userData: any) => ({
+        url: `${base_url}/user`,
+        method: "PATCH",
+        data: userData,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
 export const {
   useAuthLoginMutation,
   useRegisterMutation,
+  useUpdateUserMutation
 } = userApi;
