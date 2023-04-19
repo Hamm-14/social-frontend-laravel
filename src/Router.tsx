@@ -5,29 +5,23 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "./screens/Login";
 import NotFound from "./screens/NotFound";
 import Register from "./screens/Register";
+import CreatePost from "./components/create-post/CreatePost";
 
 const Router = () => {
-  let navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, [token, navigate]);
+    navigate('/');
+  },[]);
 
   return (
     <div>
       <Routes>
-        <Route
-          path="/"
-          element={token ? <PostList /> : <Login />}
-        />
-         <Route
-          path="/register"
-          element={token ? <PostList /> : <Register />}
-        />
+        <Route path="/" element={token ? <PostList /> : <Login />} />
+        <Route path="/register" element={token ? <PostList /> : <Register />} />
         <Route element={<ProtectedRoutes />}>
+          <Route path="/create-post" element={<CreatePost />} />
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

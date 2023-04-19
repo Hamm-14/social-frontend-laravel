@@ -35,12 +35,12 @@ const sampleLoginError: LoginError = {
 
 const sampleObject: LoginState = {
   email: "",
-  password: ""
+  password: "",
 };
 
 const loginHelperObject: LoginState = {
   email: "Valid email is required",
-  password: "Valid Password is required"
+  password: "Valid Password is required",
 };
 
 const Login = () => {
@@ -95,15 +95,15 @@ const Login = () => {
       };
       const resp: any = await authLogin(data).unwrap();
       if (resp) {
-          localStorage.setItem("username", resp.user.name);
-          localStorage.setItem("email", resp.user.email);
-          localStorage.setItem("avatar", resp.user.avatar);
-          localStorage.setItem("token", resp.token);
-          localStorage.setItem("userId", resp.user.id);
-          navigate("/");
-          setIsLoading(false);
-          return;
-        }
+        localStorage.setItem("username", resp.user.name);
+        localStorage.setItem("email", resp.user.email);
+        localStorage.setItem("avatar", resp.user.avatar);
+        localStorage.setItem("token", resp.token);
+        localStorage.setItem("userId", resp.user.id);
+        navigate("/");
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(false);
       setIsError(true);
     } catch (error) {
@@ -126,6 +126,10 @@ const Login = () => {
     ) {
       loginApi();
     }
+  };
+
+  const onRegisterClick = () => {
+    navigate("/register");
   };
 
   return (
@@ -168,7 +172,9 @@ const Login = () => {
                   label="Enter email"
                   name="email"
                   error={loginError.email}
-                  onBlur={(event) => checkLoginValidation(event.target.name, event.target.value)}
+                  onBlur={(event) =>
+                    checkLoginValidation(event.target.name, event.target.value)
+                  }
                   onChange={onHandleChange}
                   value={loginField.email}
                   size="small"
@@ -201,7 +207,9 @@ const Login = () => {
                   label="Enter password"
                   error={loginError.password}
                   name="password"
-                  onBlur={(event) => checkLoginValidation(event.target.name, event.target.value)}
+                  onBlur={(event) =>
+                    checkLoginValidation(event.target.name, event.target.value)
+                  }
                   onChange={onHandleChange}
                   value={loginField.password}
                   size="small"
@@ -213,7 +221,11 @@ const Login = () => {
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                         >
-                          {fields.showPassword ? <Visibility /> : <VisibilityOff />}
+                          {fields.showPassword ? (
+                            <Visibility />
+                          ) : (
+                            <VisibilityOff />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -225,18 +237,30 @@ const Login = () => {
                   </FormHelperText>
                 )}
               </FormControl>
-              <Button
-                id="login"
-                variant="contained"
-                style={styles.ButtonStyle}
-                onClick={onHandleSubmit}
-              >
-                {!isLoading ? (
-                  "Login"
-                ) : (
-                  <CircularProgress style={styles.circularProgress} size={25} />
-                )}
-              </Button>
+              <div style={{paddingTop: '9%'}}>
+                <Button
+                  id="login"
+                  variant="contained"
+                  style={styles.ButtonStyle}
+                  onClick={onHandleSubmit}
+                >
+                  {!isLoading ? (
+                    "Login"
+                  ) : (
+                    <CircularProgress
+                      style={styles.circularProgress}
+                      size={25}
+                    />
+                  )}
+                </Button>
+                <Button
+                  variant="contained"
+                  style={styles.ButtonStyle}
+                  onClick={onRegisterClick}
+                >
+                  Register
+                </Button>
+              </div>
 
               {isError && (
                 <Typography
@@ -304,7 +328,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: 800,
   },
   ButtonStyle: {
-    margin: "9% 0% 6% 0%",
+    marginBottom: '6%',
     fontWeight: 600,
     fontFamily: "century_gothicregular",
     background: "#0AB2FA",

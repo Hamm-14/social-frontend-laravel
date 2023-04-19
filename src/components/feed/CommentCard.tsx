@@ -4,6 +4,7 @@ import CardHeader from "@mui/material/CardHeader";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
 import { useLikeCommentMutation } from "../../apis/comment";
+import { IMAGES } from "../../assets";
 
 export default function CommentCard(commentCardData: any) {
   const [isCommentLiked, setIsCommentLiked] = React.useState(false);
@@ -40,7 +41,7 @@ export default function CommentCard(commentCardData: any) {
       <CardHeader
         avatar={
           <img
-            src={` http://127.0.0.1:8080/${commentData?.user.avatar}`}
+            src={commentData?.user.avatar ? `http://127.0.0.1:8080/${commentData?.user.avatar}` : IMAGES.profile_pic}
             style={{ width: 50, height: 45, borderRadius: "50%" }}
             alt="profile"
           />

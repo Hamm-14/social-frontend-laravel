@@ -19,7 +19,15 @@ export const postApi = projectApi.injectEndpoints({
         }),
         invalidatesTags: ["Post"],
       }),
+      createPost: builder.mutation({
+        query: (postData: any) => ({
+          url: `${base_url}/post`,
+          method: "POST",
+          data: postData
+        }),
+        invalidatesTags: ["Post"],
+      }),
   }),
 });
 
-export const { useGetAllPostsQuery, useLikePostMutation } = postApi;
+export const { useGetAllPostsQuery, useLikePostMutation, useCreatePostMutation } = postApi;

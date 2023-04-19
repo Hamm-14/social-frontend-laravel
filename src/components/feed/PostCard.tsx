@@ -17,6 +17,7 @@ import ButtonComponent from "../common/ButtonComponent";
 import CommentCard from "./CommentCard";
 import { useLikePostMutation } from "../../apis/post";
 import { useCreateCommentMutation } from "../../apis/comment";
+import { IMAGES } from "../../assets";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -91,12 +92,13 @@ export default function PostCard(postCardData: any) {
     }
   };
 
+  console.log('post user avarat', postData?.user.avatar);
   return (
-    <Card sx={{ maxWidth: 345, margin: 4, height: expanded ? 640 : 380 }}>
+    <Card sx={{ width: 345, margin: 4, height: expanded ? 640 : 380 }}>
       <CardHeader
         avatar={
           <img
-            src={` http://127.0.0.1:8080/${postData?.user.avatar}`}
+            src={postData?.user.avatar ? `http://127.0.0.1:8080/${postData?.user.avatar}` : IMAGES.profile_pic}
             style={{ width: 50, height: 45, borderRadius: "50%" }}
             alt="profile"
           />
@@ -112,7 +114,7 @@ export default function PostCard(postCardData: any) {
       <CardMedia
         component="img"
         height="194"
-        image="https://mui.com/static/images/cards/paella.jpg"
+        image={`http://127.0.0.1:8081/${postData?.post_pic}`}
         alt="Paella dish"
       />
       <CardContent>

@@ -9,4 +9,5 @@ export const IMAGES = {
   view_icon: require("./view.png"),
   accept_icon: require("./accept.png"),
   reject_icon: require("./reject.png"),
+  preview_logo: require("./preview_logo.png"),
 };
