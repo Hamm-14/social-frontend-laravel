@@ -9,7 +9,6 @@ import Collapse from "@mui/material/Collapse";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InputField from "../common/InputField";
@@ -18,6 +17,8 @@ import CommentCard from "./CommentCard";
 import { useLikePostMutation } from "../../apis/post";
 import { useCreateCommentMutation } from "../../apis/comment";
 import { IMAGES } from "../../assets";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { useNavigate } from "react-router-dom";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -42,6 +43,7 @@ export default function PostCard(postCardData: any) {
   const { postCardData: postData } = postCardData;
   const [likePost] = useLikePostMutation();
   const [createComment] = useCreateCommentMutation();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     verifyPostAlreadyLiked();
@@ -82,31 +84,40 @@ export default function PostCard(postCardData: any) {
 
   const handleCommentSend = async () => {
     const data = {
-        description: comment,
-        userId: userId,
-        postId: postData.id
+      description: comment,
+      userId: userId,
+      postId: postData.id,
     };
     const resp: any = await createComment(data).unwrap();
-    if(resp){
-        setComment('');
+    if (resp) {
+      setComment("");
     }
   };
 
-  console.log('post user avarat', postData?.user.avatar);
+  const handleEditClick = () => {
+    navigate(`/update-post/${postData.id}`);
+  };
+
   return (
     <Card sx={{ width: 345, margin: 4, height: expanded ? 640 : 380 }}>
       <CardHeader
         avatar={
           <img
-            src={postData?.user.avatar ? `http://127.0.0.1:8080/${postData?.user.avatar}` : IMAGES.profile_pic}
+            src={
+              postData?.user.avatar
+                ? `http://127.0.0.1:8080/${postData?.user.avatar}`
+                : IMAGES.profile_pic
+            }
             style={{ width: 50, height: 45, borderRadius: "50%" }}
             alt="profile"
           />
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <div onClick={handleEditClick} style={{ cursor: "pointer" }}>
+            {userId == postData.user.id && (
+              <ModeEditIcon sx={{ color: "grey" }} />
+            )}
+          </div>
         }
         title={postData?.user?.name}
         subheader={getFormattedDate(postData?.created_at)}

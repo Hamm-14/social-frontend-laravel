@@ -7,7 +7,7 @@ import InputField from "../common/InputField";
 import ButtonComponent from "../common/ButtonComponent";
 import { IMAGES } from "../../assets";
 import axios from "axios";
-import { useCreatePostMutation } from "../../apis/post";
+import { useUpdatePostMutation, useGetPostMutation } from "../../apis/post";
 
 const mainContainer: React.CSSProperties = {
   display: "flex",
@@ -48,23 +48,43 @@ const typoStyle: React.CSSProperties = {
 const chooseFileContainer: React.CSSProperties = {
   border: "2px dashed #0AB2FA",
   borderRadius: 7,
-  width: '30%',
+  width: "30%",
   padding: 12,
 };
 
-const CreatePost = () => {
+const EditPost = () => {
   const [file, setFile] = useState<File | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [createPostLoading, setCreatePostLoading] = useState(false);
-  const [postId, setPostId] = useState('');
-  const [postDescription, setPostDescription] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [postDescription, setPostDescription] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [fileDataURL, setFileDataURL] = useState<string | ArrayBuffer | null>(null);
+  const [fileDataURL, setFileDataURL] = useState<string | ArrayBuffer | null>(
+    null
+  );
   const base_url = process.env.REACT_APP_DASHBOARD_API_BASE_URL;
-  const token = localStorage.getItem('token');
-  const userId = localStorage.getItem('userId');
-  const [createPost] = useCreatePostMutation();
+  const token = localStorage.getItem("token");
+  const [updatePost] = useUpdatePostMutation();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [getPost] = useGetPostMutation();
+
+  useEffect(() => {
+    if (id) {
+      fetchPostData(id);
+    }
+  }, [id]);
+
+  const fetchPostData = async (postId: any) => {
+    const data = {
+      postId: Number(postId)
+    };
+    const resp = await getPost(data).unwrap();
+    if (resp) {
+      setPostDescription(resp.description);
+      setUploadedImage(resp.post_pic);
+    }
+  };
 
   useEffect(() => {
     let fileReader: FileReader,
@@ -98,12 +118,12 @@ const CreatePost = () => {
   };
 
   const handleUploadClick = async () => {
-    if (file) {
+    if (file && id) {
       setIsLoading(true);
       const formData = new FormData();
       formData.append("image", file);
-      formData.append('postId',postId);
-      const result = await axios({
+      formData.append("postId", id);
+      await axios({
         url: `${base_url}/post/pic`,
         method: "POST",
         data: formData,
@@ -113,29 +133,28 @@ const CreatePost = () => {
         },
       });
       setIsLoading(false);
-      navigate('/');
+      navigate("/");
     }
   };
 
   const handlePostChange = (event: any) => {
     setPostDescription(event.target.value);
-  }
+  };
 
-  const handleCreatePost = async () => {
-    if(postDescription.trim() !== ''){
-        setCreatePostLoading(true);
-        const data = {
-            userId: userId,
-            description: postDescription
-        }
-        const resp = await createPost(data).unwrap();
-        if(resp){
-            setPostDescription('');
-            setPostId(resp.id);
-            setCreatePostLoading(false);
-        }
+  const handleUpdatePost = async () => {
+    if (postDescription.trim() !== "") {
+      setCreatePostLoading(true);
+      const data = {
+        postId: id,
+        description: postDescription,
+      };
+      const resp = await updatePost(data).unwrap();
+      if (resp) {
+        setPostDescription("");
+        setCreatePostLoading(false);
+      }
     }
-  }
+  };
 
   return (
     <div style={mainContainer}>
@@ -170,12 +189,12 @@ const CreatePost = () => {
               </div>
               <div style={{ width: "98%", marginTop: 10 }}>
                 <ButtonComponent
-                  buttonName="Create Post"
+                  buttonName="Update Post"
                   buttonStyle={{
                     color: "white",
                     background: "#0AB2FA",
                   }}
-                  onClick={handleCreatePost}
+                  onClick={handleUpdatePost}
                   isLoading={createPostLoading}
                 />
               </div>
@@ -200,7 +219,13 @@ const CreatePost = () => {
                   }}
                 >
                   <img
-                    src={fileDataURL ? fileDataURL : IMAGES.preview_logo}
+                    src={
+                      fileDataURL
+                        ? fileDataURL
+                        : uploadedImage
+                        ? `http://127.0.0.1:8081/${uploadedImage}`
+                        : IMAGES.preview_logo
+                    }
                     height={200}
                     width={250}
                     alt="preview"
@@ -248,7 +273,7 @@ const CreatePost = () => {
                       fontSize: "0.8rem",
                     }}
                     onClick={handleUploadClick}
-                    disabled={!file || postId === ''}
+                    disabled={!file}
                     isLoading={isLoading}
                   />
                 </div>
@@ -261,4 +286,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

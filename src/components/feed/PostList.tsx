@@ -17,14 +17,12 @@ const sidePanelContainer: React.CSSProperties = {
 };
 
 const postContainer: React.CSSProperties = {
-  // border: "1px solid red",
   width: "95%",
   height: "770px",
   marginTop: "100px",
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "space-around",
-  zIndex: 0,
   overflow: "scroll",
 };
 

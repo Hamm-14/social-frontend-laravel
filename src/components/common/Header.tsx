@@ -61,7 +61,7 @@ const Header = (props: HeaderProps) => {
       <div style={iconsContainer}>
         <div style={{ display: "flex" }} onClick={handleCreatePostClick}>
           <div>
-           <LibraryAddIcon fontSize="large" color="secondary"/>
+           <LibraryAddIcon fontSize="large" sx={{color: "rgb(0, 47, 134)"}}/>
           </div>
           <div style={admin}>
             Create Post

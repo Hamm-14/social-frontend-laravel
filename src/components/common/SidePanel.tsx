@@ -144,7 +144,7 @@ const SidePanel: React.FC = () => {
         }}
       >
         <DrawerHeader style={drawerHeader}>
-          <Typography color={"#0AB2FA"} fontSize={40}><Diversity1Icon color="secondary" fontSize="large" /> Codeial</Typography>
+          <Typography color={"white"} fontSize={40} sx={{fontFamily: 'cursive'}}><Diversity1Icon sx={{color: 'white'}} fontSize="large" /> Codeial</Typography>
         </DrawerHeader>
         {/* <Divider
           sx={{ borderWidth: 1, marginTop: "4%", marginBottom: "2%", background: "#ECECEC" }}
