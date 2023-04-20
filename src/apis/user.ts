@@ -29,11 +29,19 @@ export const userApi = projectApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    allUsers: builder.query<any, any>({
+      query: () => ({
+        url: `${base_url}/users`,
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 
 export const {
   useAuthLoginMutation,
   useRegisterMutation,
-  useUpdateUserMutation
+  useUpdateUserMutation,
+  useAllUsersQuery,
 } = userApi;

@@ -85,7 +85,7 @@ const tabList = [
   },
   {
     id: 1,
-    route: "network",
+    route: "social-network",
     title: "Social Network",
   },
   {

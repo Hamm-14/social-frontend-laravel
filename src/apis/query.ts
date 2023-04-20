@@ -41,6 +41,6 @@ const axiosBaseQuery: BaseQueryFn<
 export const projectApi = createApi({
   reducerPath: "projectApi",
   baseQuery: retry(axiosBaseQuery),
-  tagTypes: ["User", "Post", "Comment"],
+  tagTypes: ["User", "Post", "Comment", "Friendship"],
   endpoints: (builder) => ({}),
 });
