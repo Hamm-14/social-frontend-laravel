@@ -72,9 +72,8 @@ export default function LogoutConfirmationModal(props: ModalProps) {
             <Typography
               style={{
                 margin: 8,
-                fontSize: "1.1rem",
+                fontSize: "1.5rem",
                 fontWeight: 400,
-                background: "#f8d7da",
                 borderRadius: 10,
                 padding: 15,
               }}

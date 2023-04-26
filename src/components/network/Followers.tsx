@@ -13,7 +13,6 @@ const typoStyle: React.CSSProperties = {
 const Followers = (props: any) => {
     const {data} = props;
 
-    console.log("followersData", data);
     return (
         <div style={{ width: "30%" }}>
             <Typography style={typoStyle}>Followers</Typography>

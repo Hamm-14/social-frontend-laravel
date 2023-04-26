@@ -26,7 +26,7 @@ export const friendshipApi = projectApi.injectEndpoints({
           method: "POST",
           data: userData
         }),
-        invalidatesTags: ["Friendship", "User"],
+        invalidatesTags: ["Friendship"],
       }),
       unFollow: builder.mutation({
         query: (userData: any) => ({

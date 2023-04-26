@@ -85,6 +85,7 @@ const Header = (props: HeaderProps) => {
               alt="profile_pic"
               width={42}
               height={42}
+              style={{borderRadius: '50%'}}
             />
           </div>
           <div style={admin}>

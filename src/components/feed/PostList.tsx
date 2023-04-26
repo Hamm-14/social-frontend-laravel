@@ -50,7 +50,7 @@ const Feed = () => {
           {isSuccess && data?.data?.length > 0 && data.data.map((post: any) => {
             return <PostCard postCardData={post} key={post.id}/>
           })}
-          {!isLoading && data?.length === 0 && (
+          {!isLoading && data?.data.length === 0 && (
             <Box sx={noRecordDiv}>
               <Box>No Record Found</Box>
             </Box>

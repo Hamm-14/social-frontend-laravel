@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import ButtonComponent from "../common/ButtonComponent";
 import { IMAGES } from "../../assets";
-import { useUnFollowMutation } from "../../apis/friendship";
 
 const typoStyle: React.CSSProperties = {
   color: "#002F86",
@@ -20,20 +19,8 @@ const typoStyle: React.CSSProperties = {
 };
 
 const Followings = (props: any) => {
-  const { data } = props;
-  const [UnfollowUser] = useUnFollowMutation();
-  const userId = localStorage.getItem("userId");
-
-  const handleUnFollowClick = async (userToUnFollow: any) => {
-    const data = {
-      from_user: Number(userId),
-      to_user: userToUnFollow,
-    };
-    const resp = await UnfollowUser(data).unwrap();
-    if(resp) {
-        window.location.replace('social-network');
-    }
-  };
+  const { data, handleUnFollowClick, buttonLoading } = props;
+  
   return (
     <div style={{ width: "30%" }}>
       <Typography style={typoStyle}>Followings</Typography>
@@ -48,6 +35,7 @@ const Followings = (props: any) => {
                   buttonName="Unfollow"
                   onClick={() => handleUnFollowClick(user.following.id)}
                   buttonStyle={{ fontSize: 12, color: "white" }}
+                  isLoading={buttonLoading === user.following.id}
                 />
               }
             >
